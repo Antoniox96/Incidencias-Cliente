@@ -10,7 +10,7 @@ angular.module("AppIncidencias")
 	.factory('UserService', function($http) {
 		return {
 			LogIn: function(username, password) {
-				return $http.post('/auth/local', {identifier: username, password: password});
+				return $http.post('/auth', { username: username, password: password });
 			},
 	 
 			LogOut: function() {
@@ -22,11 +22,10 @@ angular.module("AppIncidencias")
 	.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService) {
 		return {
 			request: function (config) {
-				console.log("TEST");
 				config.headers = config.headers || {};
 
 				if ( $window.sessionStorage.token ) {
-				 	config.headers.Authorization = 'Incidencias ' + $window.sessionStorage.token;
+				 	config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
 				}
 
 				return config;
@@ -37,16 +36,17 @@ angular.module("AppIncidencias")
 			},
 
 			response: function (response) {
-				if (response != null && response.status == 200 && $window.sessionStorage.token && !AuthenticationService.isAuthenticated) {
-					AuthenticationService.isAuthenticated = true;
+				if (response != null && response.status == 200 && $window.sessionStorage.token && !AuthenticationService.isLogged) {
+					AuthenticationService.isLogged = true;
 				}
+
 				return response || $q.when(response);
 			},
 
 			responseError: function(rejection) {
-				if (rejection != null && rejection.status === 401 && ($window.sessionStorage.token || AuthenticationService.isAuthenticated)) {
+				if (rejection != null && rejection.status === 401 && ($window.sessionStorage.token || AuthenticationService.isLogged)) {
 					delete $window.sessionStorage.token;
-					AuthenticationService.isAuthenticated = false;
+					AuthenticationService.isLogged = false;
 					$location.path("/login");
 				}
 

@@ -17,12 +17,13 @@
 			});
 	})
 	.run(function($rootScope, $location, $window, AuthenticationService) {
-    		$rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+    		$rootScope.$on("$routeChangeSuccess", function(event, nextRoute, currentRoute) {
     			if ( nextRoute.access === undefined ) {
-    				nextRoute.access = { requiredLogin: false };
+    				nextRoute.access = { requiredLogin: true };
     			}
-        			if ( nextRoute.access.requiredLogin && !AuthenticationService.isLogged)  {
-            			$location.path("/login");
+
+        			if ( nextRoute.access.requiredLogin && !AuthenticationService.isLogged )  {
+          			$location.path("/login");
         			}
    		});
 	});
