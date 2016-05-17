@@ -16,11 +16,9 @@ angular.module("AppIncidencias")
 			}
 
 			$scope.LogOut = function LogOut() {
-				if ( AuthenticationService.isLogged ) {
-					AuthenticationService.isLogged = false;
-					delete $window.sessionStorage.token;
-					$location.path("/login");
-				}
+				AuthenticationService.isLogged = false;
+				delete $window.sessionStorage.token;
+				$location.path("/login");
 			}
 
 		}
