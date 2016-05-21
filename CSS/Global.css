@@ -1,14 +1,15 @@
+@font-face {
+    font-family: "DIN Medium";
+    src: url("../Fuentes/DIN Medium.ttf");
+}
+
 * {
-	font-family: "Trebuchet MS", Arial;
+	font-family: "DIN Medium", 'Trebuchet MS', Arial;
 	font-size: 12px;
 }
 
 .page-header {
 	background-color: blue;
-}
-
-.btn {
-	font-weight: bold;
 }
 
 .table {
@@ -18,4 +19,12 @@
 
 .table, table, th {
 	text-align: center;
+}
+
+.table tbody tr td {
+     vertical-align: middle;
+}
+
+.table tbody td:nth-child(1) {
+	font-weight: bold;
 }

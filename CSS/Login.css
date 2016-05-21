@@ -22,6 +22,10 @@
 	box-shadow: #337AB7 1px 1px 5px;
 }
 
+.panel-title {
+	font-weight: normal;
+}
+
 .panel-heading {
 	background-color: #337AB7 !important;
 	color: white !important;
