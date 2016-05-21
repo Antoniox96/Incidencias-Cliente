@@ -28,3 +28,15 @@
 .table tbody td:nth-child(1) {
 	font-weight: bold;
 }
+
+.table thead tr th:nth-child(1) {
+	width: 2%;
+}
+
+.table thead tr th:nth-child(2) {
+	width: 5%;
+}
+
+.table tbody tr td i {
+	margin-top: 4px;
+}
