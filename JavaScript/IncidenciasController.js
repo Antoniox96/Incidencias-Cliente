@@ -152,4 +152,22 @@ angular.module("AppIncidencias")
 			}
 		};
 
+		$scope.BorrarIncidencia = function () {
+			if ( $rootScope.Rol == '1' ) {
+				$http.delete('/Incidencia/' + $scope.IncidenciaSeleccionada)
+
+					.success(function(data) {
+							$route.reload();
+					})
+					.error(function(error) {
+						console.log(error);
+					});	
+
+				$timeout(function() {
+					$route.reload();
+				}, 10 );
+			}
+
+		};
+
 	});
